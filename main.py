@@ -589,6 +589,8 @@ def GUI():
         if event.type == pygame.MOUSEBUTTONDOWN:
             action = take_action(cur)
             if action == 'hint':
+                if Puzzle.is_goal():
+                    return 0
                 # print("SHOW THE HINT ")
                 hintSolver()
             elif action == 'reset':
@@ -596,11 +598,14 @@ def GUI():
                 gameStart()
                 exit()
             elif action == 'solveMe':
+                if Puzzle.is_goal():
+                    return 0
                 # print("SHOW THE FULL SOLUTION")
                 fullSolver()
-                time.sleep(5)
-                gameStart()
-                exit()
+                #optional if you want to restart automatically
+#                 time.sleep(5)
+#                 gameStart()
+#                 exit()
     # Actions
     if next_move is not None:
         swap(next_move)
